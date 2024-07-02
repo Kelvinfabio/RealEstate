@@ -1,17 +1,13 @@
+<?php
+session_start();
+
+$r = $_SESSION['user'] ;
+$item = $_SESSION['item'];
+
+
+?>
 <!DOCTYPE html>
 
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
 <html
   lang="en"
   class="light-style layout-menu-fixed"
@@ -290,23 +286,26 @@
           <div class="content-wrapper">
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1 container-p-y" id="user">
+              
               <div class="row mb-5">
+                <?php foreach($item as $k){?>
                 <div class="col-md-6 col-lg-4 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h5 class="card-title">Por arrendar</h5>
-                      <h6 class="card-subtitle text-muted">Vivenda v4 Futungo de Belas</h6>
+                      <h5 class="card-title"><?php echo $k['Titulo']?></h5>
+                      <h6 class="card-subtitle text-muted">Localizacao: <?php echo $k['Localizacao']?></h6>
                     </div>
                     <img class="img-fluid" src="assets/img/Vivendav4.png" alt="Card image cap" />
                     <div class="card-body">
-                      <p class="card-text">Localização: Futungo de Belas</p>
                       <a href="javascript:void(0);" class="card-link">Editar</a>
                       <a href="javascript:void(0);" class="card-link">Mais Informações</a>
                     </div>
                   </div>
                 </div>
+                <?php };?>
               </div>
+              
             </div>
             <!-- / Content -->
 
@@ -354,19 +353,12 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-
-    <div class="buy-now">
-      <a
-        href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-        >Add Propriedade</a
-      >
-    </div>
+     
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="assets/Sneat/vendor/libs/jquery/jquery.js"></script>
+    <script src="loginproprietario.js"></script>
     <script src="assets/Sneat/vendor/libs/popper/popper.js"></script>
     <script src="assets/Sneat/vendor/js/bootstrap.js"></script>
     <script src="assets/Sneat/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>

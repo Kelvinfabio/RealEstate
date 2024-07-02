@@ -144,35 +144,6 @@ session_destroy();
         </div>
       </div>
     </div>
-    <script>
-      function login(){
-        var Email = document.getElementById("Email").value;
-        var Password = document.getElementById("Password").value;
-
-        let user = {
-          "Email":Email,
-          "Password":Password
-          
-        }
-        fetch('http://localhost/RealEstate/view/links.php/user/login',{
-          method: 'POST',
-          headers:{
-            'Content-type':'application/json'
-          },
-          body:JSON.stringify(user)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-        if (data.msg === 'Login bem-sucedido') {
-            window.location.href = 'Propriedade.html'; // Redirecionar para a página de sucesso
-        } else {
-            alert('Credenciais inválidas'); // Mostrar mensagem de erro
-        }
-    })
-        .catch(error => console.error('Erro', error));
-      }
-    </script>
 
     <!-- / Content -->
 
@@ -184,6 +155,7 @@ session_destroy();
     <script src="view/assets/Sneat/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
     <script src="view/assets/Sneat/vendor/js/menu.js"></script>
+    <script src="loginproprietario.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->

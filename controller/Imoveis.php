@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../conexao/conexao.php';
 require_once '../model/utilizador.php';
 require_once '../model/Imoveis.php';
@@ -13,42 +12,39 @@ $method = $_SERVER['REQUEST_METHOD'];
 $r;
 switch ($method) {
     case 'GET':
-        if ($endpoint === '/user') {
+        if ($endpoint === '/imoveis') {
             $r = $user->getUtilizador();
             echo json_encode($r);
-        } else if (preg_match('/^\/user\/(\d+)$/', $endpoint, $matches)) {
+        } else if (preg_match('/^\/imoveis\/(\d+)$/', $endpoint, $matches)) {
             $id = $matches[1];
             $r = $user->getUserById($id);
             echo json_encode([$r]);
-        } else if (preg_match('/^\/user\/item\/(\d+)$/', $endpoint, $matches)) {
-            $id = $matches[1];
-            $r = $imovel->getProprietyById($id);
-            echo json_encode([$r]);
-        }
+        } 
         break;
     case 'POST':
-        if ($endpoint === '/user') {
+        if ($endpoint === '/imoveis') {
             $data = json_decode(file_get_contents('php://input'), true);
-            $user->add($data);
-            echo json_encode(['user inserido com sucesso']);
-        } else if ($endpoint === '/user/proprietario') {
+            $imovel->InsertImovel($data);
+            echo json_encode(['Imovel inserido com sucesso']);
+        } else if ($endpoint === '/imoveis/apartamento') {
             $data = json_decode(file_get_contents('php://input'), true);
-            $user->addProprietario($data);
-            echo json_encode(['user inserido com sucesso']);
-        } else if ($endpoint === '/user/login') {
-            $data = json_decode(file_get_contents('php://input'), true);
-            $r = $user->LoginProprietario($data);
-            $id = $r[0]["id_proprietario"];
-            $item = $imovel->getProprietyById($id);
-
-            $_SESSION['user'] = $r;
-            $_SESSION['item'] = $item;
-            if ($r) {
-                    echo json_encode(['msg' => 'Login bem-sucedido', 'user' => $r]);
-                } else {
-                    echo json_encode(['msg' => 'Credenciais inválidas']);  
+            $imovel->InsertApartamento($data);
+            echo json_encode(['Apartamento inserido com sucesso']);
         }
-    }
+        else if ($endpoint === '/imoveis/vivenda') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $imovel->InsertVivenda($data);
+            echo json_encode(['Vivenda inserido com sucesso']);
+        }
+        else if ($endpoint === '/imoveis/vivenda') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $imovel->InsertVivenda($data);
+            echo json_encode(['Vivenda inserido com sucesso']);
+        }else if ($endpoint === '/imoveis/Terreno') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $imovel->InsertTerreno($data);
+            echo json_encode(['Terreno inserido com sucesso']);
+        }
         break;
     case 'DELETE':
         if (preg_match('/^\/user\/(\d+)$/', $endpoint, $matches)) {
