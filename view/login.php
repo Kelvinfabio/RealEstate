@@ -88,7 +88,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="user_mail"
+                    id="Email"
                     placeholder="Enter your email or username"
                     autofocus
                   />
@@ -103,7 +103,7 @@
                   <div class="input-group input-group-merge">
                     <input
                       type="password"
-                      id="pass"
+                      id="Password"
                       class="form-control"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
@@ -118,7 +118,7 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                  <button class="btn btn-primary d-grid w-100" type="button" onclick="login()">Sign in</button>
                 </div>
               </form>
 
@@ -134,6 +134,37 @@
         </div>
       </div>
     </div>
+    <script>
+      function login() {
+    var Email = document.getElementById("Email").value;
+    var Password = document.getElementById("Password").value;
+
+    let user = {
+        "Email": Email,
+        "Password": Password
+
+    }
+    fetch('http://localhost/RealEstate/view/links.php/user/login', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            if (data.msg === 'Login bem-sucedido') {
+                // Redirecione para a nova página
+                window.location.href = 'index.php';
+                // Redirecionar para a página de sucesso
+            } else {
+                alert('Credenciais inválidas'); // Mostrar mensagem de erro
+            }
+        })
+        .catch(error => console.error('Erro', error));
+}
+    </script>
 
     <!-- / Content -->
 

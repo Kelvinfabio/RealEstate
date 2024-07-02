@@ -1,16 +1,21 @@
 <?php
 class Imoveis{
-    private $conn;
+    private $con;
     public function __construct($con){
-        $this->conn = $con;
+        $this->con = $con;
     }
 
     public function getProprietyById($id){
         $id_proprietario = $id;
 
         $query = "SELECT * from imoveis WHERE id_proprietario = ?";
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->con->prepare($query);
         $stmt->execute([$id_proprietario]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getPropriety(){
+        $stmt = $this->con->query("SELECT * from imoveis");
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
@@ -24,25 +29,25 @@ class Imoveis{
         $Topologia =$data['Topologia']; 
 
         try {
-            $this->conn->beginTransaction();
+            $this->con->beginTransaction();
     
             $query = "insert into imoveis(id_proprietario,Titulo,AnoConstru,Preco,AreaImovel,Localizacao,Topologia)VALUES(?,?,?,?,?,?,?)";
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->con->prepare($query);
             $stmt->execute([$id_proprietario, $Titulo, $AnoConstru, $Preco, $AreaImovel, $Localizacao, $Topologia]);
     
-            $lastInsertId = $this->conn->lastInsertId();
+            $lastInsertId = $this->con->lastInsertId();
     
-            if ($Topologia == 'Apartamento') {
+            if (str_starts_with($Topologia, "a") || str_starts_with($Topologia, "A")|| str_starts_with($Topologia, "Ap")||str_starts_with($Topologia, "ap")) {
                 $this->InsertApartamento(['id_imoveis' => $lastInsertId, 'Num_quarto' => $data['Num_quarto'], 'Num_sala' => $data['Num_sala'], 'Num_cozinha' => $data['Num_cozinha'], 'Num_WC' => $data['Num_WC']]);
-            } elseif ($Topologia == 'Vivenda') {
-                $this->InsertVivenda(['id_imoveis' => $lastInsertId, 'Num_quarto' => $data['Num_quarto'], 'Num_Sala' => $data['Num_Sala'], 'Num_cozinha' => $data['Num_cozinha'], 'Num_WC' => $data['Num_WC']]);
-            } elseif ($Topologia == 'Terreno') {
+            } elseif (str_starts_with($Topologia, "v") || str_starts_with($Topologia, "V")) {
+                $this->InsertVivenda(['id_imoveis' => $lastInsertId, 'Num_quarto' => $data['Num_quarto'], 'Num_sala' => $data['Num_sala'], 'Num_cozinha' => $data['Num_cozinha'], 'Num_WC' => $data['Num_WC']]);
+            } elseif (str_starts_with($Topologia, "T") || str_starts_with($Topologia, "t")) {
                 $this->InsertTerreno(['id_imoveis' => $lastInsertId, 'Zona' => $data['Zona']]);
             }
     
-            $this->conn->commit();
+            $this->con->commit();
         } catch (PDOException $e) {
-            $this->conn->rollBack();
+            $this->con->rollBack();
             throw $e;
         }
     }
@@ -54,26 +59,26 @@ class Imoveis{
         $Num_WC =$data['Num_WC'];
 
         $query = "insert into apartamento(id_imoveis,Num_quarto,Num_sala,Num_cozinha,Num_WC)VALUES(?,?,?,?,?)";
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->con->prepare($query);
         $stmt->execute([$id_imoveis,$Num_quarto,$Num_sala,$Num_cozinha,$Num_WC]);
     }
     public function InsertVivenda($data){
         $id_imoveis = $data['id_imoveis'];
         $Num_quarto= $data['Num_quarto'];
-        $Num_Sala = $data['Num_Sala'];
+        $Num_sala = $data['Num_sala'];
         $Num_cozinha =$data['Num_cozinha'];
         $Num_WC =$data['Num_WC'];
 
-        $query = "insert into vivenda(id_imoveis,Num_quarto,Num_Sala,Num_cozinha,Num_WC)VALUES(?,?,?,?,?)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute([$id_imoveis,$Num_quarto,$Num_Sala,$Num_cozinha,$Num_WC]);
+        $query = "insert into vivenda(id_imoveis,Num_quarto,Num_sala,Num_cozinha,Num_WC)VALUES(?,?,?,?,?)";
+        $stmt = $this->con->prepare($query);
+        $stmt->execute([$id_imoveis,$Num_quarto,$Num_sala,$Num_cozinha,$Num_WC]);
     }
     public function InsertTerreno($data){
         $id_imoveis = $data['id_imoveis'];
         $Zona= $data['Zona'];
 
-        $query = "insert into vivenda(id_imoveis,Zona)VALUES(?,?)";
-        $stmt = $this->conn->prepare($query);
+        $query = "insert into terreno(id_imoveis,Zona)VALUES(?,?)";
+        $stmt = $this->con->prepare($query);
         $stmt->execute([$id_imoveis,$Zona]);
     }
 }

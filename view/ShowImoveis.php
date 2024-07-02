@@ -1,3 +1,9 @@
+<?php
+require '../conexao/conexao.php';
+require '../model/Imoveis.php';
+$imoveis = new Imoveis($con);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +15,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="assets/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,34 +28,29 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="assets/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
-        <div id="spinner"
-            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
+
         <!-- Spinner End -->
 
 
         <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                <a href="index.php" class="navbar-brand d-flex align-items-center text-center">
                     <div class="icon p-2 me-2">
-                        <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
+                        <img class="img-fluid" src="assets/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
                     </div>
                     <h1 class="m-0 text-primary">RealEstate</h1>
                 </a>
@@ -183,7 +184,9 @@
                         </div>
                     </div>
                 </div>
+                <?php foreach($imoveis->getPropriety() as $k){?>
                 <div class="col-lg-3 col-md-6 fadeInUp" data-wow-delay="0.1s">
+                
                     <div class="property-item rounded overflow-hidden m-2">
                        <div class="property-item rounded overflow-hidden m-2">
                                 <div class="position-relative overflow-hidden ">
@@ -198,7 +201,7 @@
                                     </div>
                                 </div>
                                 <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">120.000/Por Mês</h5>
+                                    <h5 class="text-primary mb-3"><?php echo $k['Preco']?></h5>
                                     <a class="d-block h5 mb-2" href="ShowEachImoveis.html">Casa Luxuosa Comoda</a>
                                     <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Av.21 De janeiro Gamek</p>
                                 </div>
@@ -213,69 +216,9 @@
                                 </div>
                             </div>
                     </div>
+                    
                 </div>
-                <div class="col-lg-3 col-md-6 fadeInUp" data-wow-delay="0.1s">
-                    <div class="property-item rounded overflow-hidden m-2">
-                       <div class="property-item rounded overflow-hidden m-2">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=""><img class="img-fluid" src="img/property-1.jpg" alt=""></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                        For Sell
-                                    </div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                        Apartamento
-                                    </div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">120.000/Por Mês</h5>
-                                    <a class="d-block h5 mb-2" href="ShowEachImoveis.html">Casa Luxuosa Comoda</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Av.21 De janeiro Gamek</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i
-                                            class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i
-                                            class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i
-                                            class="fa fa-bath text-primary me-2"></i>2
-                                        Bath</small>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 fadeInUp" data-wow-delay="0.1s">
-                    <div class="property-item rounded overflow-hidden m-2">
-                       <div class="property-item rounded overflow-hidden m-2">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=""><img class="img-fluid" src="img/property-1.jpg" alt=""></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                        For Sell
-                                    </div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                        Apartamento
-                                    </div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">120.000/Por Mês</h5>
-                                    <a class="d-block h5 mb-2" href="ShowEachImoveis.html">Casa Luxuosa Comoda</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Av.21 De janeiro Gamek</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i
-                                            class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i
-                                            class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i
-                                            class="fa fa-bath text-primary me-2"></i>2
-                                        Bath</small>
-                                </div>
-                            </div>
-                    </div>
-                </div>
+                <?php }?>
             </div>
         </div>
 
@@ -376,12 +319,13 @@
     </div>
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="assets/Sneat/vendor/libs/jquery/jquery.js"></script>
+    <script src="loginproprietario.js"></script>
+    <script src="assets/Sneat/vendor/libs/popper/popper.js"></script>
+    <script src="assets/Sneat/vendor/js/bootstrap.js"></script>
+    <script src="assets/Sneat/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="assets/Sneat/vendor/js/menu.js"></script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

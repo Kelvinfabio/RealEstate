@@ -46,6 +46,16 @@ class Utilizador{
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    public function Login($user){
+        $Email = $user['Email'];
+        $pass = $user["Password"];
+
+        $query = "SELECT * from cliente WHERE Email = ? AND Password= ? ";
+        $stmt = $this->con->prepare($query);
+        $stmt->execute([$Email,$pass]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public function getUserById($id){
         $query = "select * from cliente where id_cliente = ?";
         $stmt = $this->con->prepare($query);
@@ -54,7 +64,7 @@ class Utilizador{
         return $result;
     }
     public function delete($id){
-        $query = "delete from usuario where id_user = ?";
+        $query = "delete from imoveis where id_user = ?";
         $stmt = $this->con->prepare($query);
         $stmt->execute([$id]);
         $result = $stmt->fetchObject();

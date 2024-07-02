@@ -4,7 +4,6 @@ session_start();
 $r = $_SESSION['user'] ;
 $item = $_SESSION['item'];
 
-
 ?>
 <!DOCTYPE html>
 
@@ -16,7 +15,7 @@ $item = $_SESSION['item'];
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Fluid - Layouts | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Owner RealEstate </title>
 
     <meta name="description" content="" />
 
@@ -59,7 +58,7 @@ $item = $_SESSION['item'];
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                    <a href="Propriedade.php" class="navbar-brand d-flex align-items-center text-center">
                         <div class="icon p-2 me-2">
                             <img class="img-fluid" src="assets/img/icon-deal.png" alt="Icon"
                                 style="width: 20px; height: 20px;">
@@ -77,88 +76,16 @@ $item = $_SESSION['item'];
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item">
-                        <a href="index.html" class="menu-link">
+                        <a href="Propriedade.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Dashboard</div>
+                            <div data-i18n="Analytics">Pagina Inicial</div>
                         </a>
                     </li>
 
                     <!-- Layouts -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                            <div data-i18n="Misc">Misc</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="pages-misc-error.html" class="menu-link">
-                                    <div data-i18n="Error">Error</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="pages-misc-under-maintenance.html" class="menu-link">
-                                    <div data-i18n="Under Maintenance">Under Maintenance</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                     <!-- Components -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
-                    <!-- Cards -->
-                    <!-- User interface -->
-
-                    <!-- Extended components -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-copy"></i>
-                            <div data-i18n="Extended UI">Extended UI</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
-                                    <div data-i18n="Perfect Scrollbar">Perfect scrollbar</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="extended-ui-text-divider.html" class="menu-link">
-                                    <div data-i18n="Text Divider">Text Divider</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item">
-                        <a href="icons-boxicons.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-crown"></i>
-                            <div data-i18n="Boxicons">Boxicons</div>
-                        </a>
-                    </li>
-
-                    <!-- Forms & Tables -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp;
-                            Tables</span></li>
-                    <li class="menu-item">
-                        <a href="tables-basic.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-table"></i>
-                            <div data-i18n="Tables">Tables</div>
-                        </a>
-                    </li>
+                   
                     <!-- Misc -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-                    <li class="menu-item">
-                        <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                            target="_blank" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-support"></i>
-                            <div data-i18n="Support">Support</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                            target="_blank" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-file"></i>
-                            <div data-i18n="Documentation">Documentation</div>
-                        </a>
-                    </li>
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -368,10 +295,13 @@ $item = $_SESSION['item'];
                                             <!-- additional fields will appear here -->
                                             <div class="mb-3">
                                                 <label class="form-label" for="basic-default-message">Zona</label>
-                                                <input type="text" id="basic-default-phone" class="form-control phone-mask"
+                                                <input type="text" id="Zona" class="form-control phone-mask"
                                                     placeholder="Zona urbana ou Rural" />
                                             </div>
                                         </div>
+                                        <?php foreach($item as $k){?>
+                                        <input type="hidden" name="id_proprietario" id="id_proprietario" value="<?php echo $k['id_proprietario'] ?>">
+                                        <?php }?>
                                         <button type="button" onclick="cadastrar()" class="btn btn-primary">Send</button>
                                     </form>
                                 </div>
@@ -446,26 +376,47 @@ $item = $_SESSION['item'];
     </script>
     <script>
         function cadastrar(){
-            var Titulo = document.getElementById("Titulo");
-            var AnoConstru = document.getElementById("AnoConstru");
-            var Preco = document.getElementById("Preco");
-            var AreaImovel = document.getElementById("AreaImovel");
-            var Localizacao = document.getElementById("Localizacao");
-            var Topologia = document.getElementById("Topologia");
-            var Num_cozinha = document.getElementById("Num_cozinha");
-            var Num_WC = document.getElementById("Num_WC");
-            var Num_quarto = document.getElementById("Num_quarto");
-            var Num_Sala = document.getElementById("Num_sala");
+            
+            var Titulo = document.getElementById("Titulo").value;
+            var AnoConstru = document.getElementById("AnoConstru").value;
+            var Preco = document.getElementById("Preco").value;
+            var AreaImovel = document.getElementById("AreaImovel").value;
+            var Localizacao = document.getElementById("Localizacao").value;
+            var Topologia = document.getElementById("Topologia").value;
+            var Num_cozinha = document.getElementById("Num_cozinha").value;
+            var Num_WC = document.getElementById("Num_WC").value;
+            var Num_quarto = document.getElementById("Num_quarto").value;
+            var Num_sala = document.getElementById("Num_sala").value;
+            var id_proprietario = document.getElementById('id_proprietario').value;
+            var zona = document.getElementById("Zona").value;
 
             let user = {
+                "id_proprietario":id_proprietario,
                 "Titulo":Titulo,
                 "AnoConstru":AnoConstru,
-                "Preco":Preco
+                "Preco":Preco,
+                "AreaImovel":AreaImovel,
+                "Localizacao":Localizacao,
+                "Topologia":Topologia,
+                "Num_cozinha":Num_cozinha,
+                "Num_WC":Num_WC,
+                "Num_quarto":Num_quarto,
+                "Num_sala":Num_sala,
+                "Zona":zona
                 
               }
-
-            
-        }
+              fetch('http://localhost/RealEstate/view/links.php/imoveis',{
+                method: 'POST',
+                headers:{
+                  'Content-type':'application/json'
+                },
+                body:JSON.stringify(user)
+                
+              }).then(swal("Cadastro efectuado com sucesso!", "", "success"),
+            )
+              .catch((error)=>console.error("erro",error));
+            }
+        
     </script>
     <script>
 
@@ -477,6 +428,7 @@ $item = $_SESSION['item'];
     <script src="assets/Sneat/vendor/libs/popper/popper.js"></script>
     <script src="assets/Sneat/vendor/js/bootstrap.js"></script>
     <script src="assets/Sneat/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="assets/Sneat/vendor/js/menu.js"></script>
     <!-- endbuild -->

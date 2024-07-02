@@ -1,3 +1,9 @@
+<?php
+require '../conexao/conexao.php';
+require '../model/Imoveis.php';
+$imoveis = new Imoveis($con);
+
+?>
 <!DOCTYPE html>
 
 <html lang="pt-pt">
@@ -73,7 +79,7 @@
 
                     </div>
                     <a href="LoginProprietario.php" class="btn btn-primary px-3 d-none d-lg-flex">Add Propriedade</a>
-                    <a href="login.html" class="btn btn-primary px-3 d-none d-lg-flex m-2">Login</a>
+                    <a href="login.php" class="btn btn-primary px-3 d-none d-lg-flex m-2">Login</a>
                 </div>
             </nav>
         </div>
@@ -208,7 +214,7 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                         <div class="about-img position-relative overflow-hidden p-5 pe-0">
-                            <img class="img-fluid w-100" src="img/vivenda.jpeg">
+                            <img class="img-fluid w-100" src="assets/img/vivenda.jpeg">
                         </div>
                     </div>
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
@@ -235,8 +241,10 @@
                     </div>
                 </div>
                 <div class="tab-content">
-                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div id="tab-1" class="tab-pane fade show p-0 active"> 
+                        
                         <div class="row g-4">
+                           <?php foreach($imoveis->getPropriety() as $k){?>
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
@@ -249,9 +257,9 @@
                                             Vivenda</div>
                                     </div>
                                     <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">250.000kz</h5>
-                                        <a class="d-block h5 mb-2" href="">Vivenda v4 Futungo de Belas</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Futungo De Belas</p>
+                                        <h5 class="text-primary mb-3"><?php echo $k['Preco']?></h5>
+                                        <a class="d-block h5 mb-2" href=""><?php echo $k['Titulo']?></a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i><?php echo $k['Localizacao']?></p>
                                     </div>
                                     <div class="d-flex border-top">
                                         <small class="flex-fill text-center border-end py-2"><i
@@ -261,127 +269,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="assets/img/VivendaOcean.png" alt=""></a>
-                                        <div
-                                            class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                            Por Arrendar</div>
-                                        <div
-                                            class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                            Vivenda</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">500.000kz</h5>
-                                        <a class="d-block h5 mb-2" href="">Vivenda V3+1 Ocean Ville</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Ocean Ville, Talatona, Luanda</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i
-                                                class="fa fa-bed text-primary me-2"></i>3 Quartos suites</small>
-                                        <small class="flex-fill text-center py-2"><i
-                                                class="fa fa-bath text-primary me-2"></i>2 Quartos de banhos</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="assets/img/Apartamento.png" alt=""></a>
-                                        <div
-                                            class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                            Venda</div>
-                                        <div
-                                            class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                            Office</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">600 000 USD</h5>
-                                        <a class="d-block h5 mb-2" href="">APARTAMENTO T3</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>CONDOMÍNIO CORIMBA RESIDENCE - LUANDA</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i
-                                                class="fa fa-bed text-primary me-2"></i>3 Quartos(1 Suite)</small>
-                                        <small class="flex-fill text-center py-2"><i
-                                                class="fa fa-bath text-primary me-2"></i>2 Quartos de Banho</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="assets/img/Terreno.png" alt=""></a>
-                                        <div
-                                            class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                          Venda</div>
-                                        <div
-                                            class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                            Building</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">
-                                            50 000 000 AKZ</h5>
-                                        <a class="d-block h5 mb-2" href="">Terreno No Benfica</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Av Fidel de Castro, Benfica
-                                            </p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i
-                                                class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                        <small class="flex-fill text-center py-2"><i
-                                                class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="assets/img/ApartamentoT3.png" alt=""></a>
-                                        <div
-                                            class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                            Por Arrendar</div>
-                                        <div
-                                            class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                            Home</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">700 000 kz</h5>
-                                        <a class="d-block h5 mb-2" href="">APARTAMENTO T3 EM CONDOMÍNIO BOULEVARD</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>Av. Fidel de Castro, Benfica</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i
-                                                class="fa fa-bed text-primary me-2"></i>3 Quartos</small>
-                                        <small class="flex-fill text-center py-2"><i
-                                                class="fa fa-bath text-primary me-2"></i>2 Quartos Banhos</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="assets/img/Terreno2.png" alt=""></a>
-                                        <div
-                                            class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                            Venda</div>
-                                        <div
-                                            class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                            Shop</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">60.000.000kz</h5>
-                                        <a class="d-block h5 mb-2" href="">Terreno 2 lotes</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>LAR DO PATRIOTA</p>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                            <?php }?>
+                        </div>
+                        <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
                                 <a class="btn btn-primary py-3 px-5" href="">Procurar por mais propriedades.</a>
                             </div>
-                        </div>
                     </div>
                 
                 </div>
@@ -397,7 +289,7 @@
                     <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
                         <div class="row g-5 align-items-center">
                             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                                <img class="img-fluid rounded w-100" src="img/call-to-action.jpg" alt="">
+                                <img class="img-fluid rounded w-100" src="assets/img/call-to-action.jpg" alt="">
                             </div>
                             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                                 <div class="mb-4">
@@ -434,7 +326,7 @@
                             <p>É incrivel poder contar com a RealEstate para resolver questões mobiliarias, sinto-me realizado com essa conquista. 
                                 Espero que consiga encontrar aquilo que procura</p>
                             <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg"
+                                <img class="img-fluid flex-shrink-0 rounded" src="assets/img/testimonial-1.jpg"
                                     style="width: 45px; height: 45px;">
                                 <div class="ps-3">
                                     <h6 class="fw-bold mb-1">Etiandra Gouveia</h6>
@@ -448,7 +340,7 @@
                                 Muito obrigado!!
                             </p>
                             <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-2.jpg"
+                                <img class="img-fluid flex-shrink-0 rounded" src="assets/img/testimonial-2.jpg"
                                     style="width: 45px; height: 45px;">
                                 <div class="ps-3">
                                     <h6 class="fw-bold mb-1">Ericlenio Nunes </h6>
@@ -461,7 +353,7 @@
                             <p>É uma honra poder estar aqui e dizer que consegui uma moradia de ferias para passar com a minha familia, foi incrivel o tempo 
                                 que passei, graças a RealEstate proporcionou-me este lindo momento.</p>
                             <div class="d-flex align-items-center">
-                                <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-3.jpg"
+                                <img class="img-fluid flex-shrink-0 rounded" src="assets/img/testimonial-3.jpg"
                                     style="width: 45px; height: 45px;">
                                 <div class="ps-3">
                                     <h6 class="fw-bold mb-1">Ana de Jesus</h6>
@@ -503,22 +395,22 @@
                         <h5 class="text-white mb-4">Galeria de fotos</h5>
                         <div class="row g-2 pt-2">
                             <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/vivenda.jpeg" alt="">
+                                <img class="img-fluid rounded bg-light p-1" src="assets/img/vivenda.jpeg" alt="">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/vivenda2.jpg" alt="">
+                                <img class="img-fluid rounded bg-light p-1" src="assets/img/vivenda2.jpg" alt="">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/VivendaOcean.png" alt="">
+                                <img class="img-fluid rounded bg-light p-1" src="assets/img/VivendaOcean.png" alt="">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/Vivendav4.png" alt="">
+                                <img class="img-fluid rounded bg-light p-1" src="assets/img/Vivendav4.png" alt="">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/Apartamento.png" alt="">
+                                <img class="img-fluid rounded bg-light p-1" src="assets/img/Apartamento.png" alt="">
                             </div>
                             <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-6.jpg" alt="">
+                                <img class="img-fluid rounded bg-light p-1" src="assets/img/property-6.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -531,7 +423,6 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
-
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

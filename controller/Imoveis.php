@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../conexao/conexao.php';
 require_once '../model/utilizador.php';
 require_once '../model/Imoveis.php';
@@ -13,13 +14,10 @@ $r;
 switch ($method) {
     case 'GET':
         if ($endpoint === '/imoveis') {
-            $r = $user->getUtilizador();
-            echo json_encode($r);
-        } else if (preg_match('/^\/imoveis\/(\d+)$/', $endpoint, $matches)) {
-            $id = $matches[1];
-            $r = $user->getUserById($id);
+            $r = $imovel->getPropriety();
+            $_SESSION['imoveis']=$r;
             echo json_encode([$r]);
-        } 
+        }
         break;
     case 'POST':
         if ($endpoint === '/imoveis') {
